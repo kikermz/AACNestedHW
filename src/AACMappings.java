@@ -6,7 +6,7 @@
  * and updating the set of images that would be shown and handling
  * an interactions.
  * 
- * @author Catie Baker & YOUR NAME HERE
+ * @author Catie Baker & Enrique Loza
  *
  */
 public class AACMappings implements AACPage {

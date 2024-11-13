@@ -1,21 +1,26 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 /**
  * Represents the mappings for a single category of items that should
  * be displayed
  * 
- * @author Catie Baker & YOUR NAME HERE
+ * @author Catie Baker & Enrique Loza
  *
  */
 public class AACCategory implements AACPage {
 
-	
+	 // Fields
+    private String categoryName;
+    private Map<String, String> items;
 	/**
 	 * Creates a new empty category with the given name
 	 * @param name the name of the category
 	 */
 	public AACCategory(String name) {
-
+		 this.categoryName = name;
+        this.items = new HashMap<>();
 	}
 	
 	/**
@@ -25,6 +30,8 @@ public class AACCategory implements AACPage {
 	 */
 	public void addItem(String imageLoc, String text) {
 
+		items.put(imageLoc,text);
+
 	}
 
 	/**
@@ -33,7 +40,7 @@ public class AACCategory implements AACPage {
 	 * it should return an empty array
 	 */
 	public String[] getImageLocs() {
-		return null;
+		return items.keySet().toArray(new String[0]);
 	}
 
 	/**
@@ -41,7 +48,7 @@ public class AACCategory implements AACPage {
 	 * @return the name of the category
 	 */
 	public String getCategory() {
-		return "";
+		return categoryName;
 	}
 
 	/**
@@ -52,7 +59,10 @@ public class AACCategory implements AACPage {
 	 * 		   category
 	 */
 	public String select(String imageLoc) {
-		return "";
+		if (!items.containsKey(imageLoc)) {
+            throw new NoSuchElementException("Image not found in category: " + imageLoc);
+        }
+        return items.get(imageLoc);
 	}
 
 	/**
@@ -61,6 +71,6 @@ public class AACCategory implements AACPage {
 	 * @return true if it is in the category, false otherwise
 	 */
 	public boolean hasImage(String imageLoc) {
-		return false;
+		return items.containsKey(imageLoc);
 	}
 }
